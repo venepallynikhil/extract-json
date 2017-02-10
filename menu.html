@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<script src="Scripts/angular.min.js"></script>
+<script src="script.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<script>
+
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function ($scope, $http) {
+    $http.get("http://162.17.231.114:121/SpinoService.svc/GetCategory")
+    .then(function (response) {
+        { $scope.category_name = response.data.GetCategoryResult; }
+    });});
+</script>
+<body ng-app="myApp"  ng-controller="myCtrl">
+
+
+
+ <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">menu
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" >
+      <li><a href="#" ng-repeat="name in category_name">{{ name.category_name }}</a></li>
+     
+    </ul>
+  </div>
+</body>
+</html>
+
+
+
+
+
